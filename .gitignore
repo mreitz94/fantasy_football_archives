@@ -36,6 +36,6 @@ yarn-debug.log*
 /config/master.key
 
 /app/assets/builds/*
-!/app/assets/builds/application.tailwind.css
+!/app/assets/builds/.keep
 
 
