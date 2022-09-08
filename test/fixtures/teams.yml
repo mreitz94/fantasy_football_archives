@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  league: one
+  source_id: MyString
+  location: MyString
+  nickname: MyString
+  abbr: MyString
+
+two:
+  league: two
+  source_id: MyString
+  location: MyString
+  nickname: MyString
+  abbr: MyString

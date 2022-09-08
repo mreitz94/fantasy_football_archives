@@ -1,0 +1,37 @@
+<div id="<%= dom_id league %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= league.user_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= league.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Source:</strong>
+    <%= league.source %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Source settings:</strong>
+    <%= league.source_settings %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Start year:</strong>
+    <%= league.start_year %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Shareable:</strong>
+    <%= league.shareable %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this league", league, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this league', edit_league_path(league), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

@@ -1,0 +1,70 @@
+<%= form_with(model: league, class: "contents") do |form| %>
+  <% if league.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(league.errors.count, "error") %> prohibited this league from being saved:</h2>
+
+      <ul>
+        <% league.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :nickname %>
+    <%= form.text_field :nickname, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :source_id, 'League ID' %>
+
+    <% unless league.persisted? %>
+      <p class="text-sm text-gray-500 my-3">
+        This is the ID found in the URL when at the home page of your ESPN fantasy league: https://fantasy.espn.com/football/team?
+        <b><i>leagueId=123456</i></b>
+      </p>
+    <% end %>
+
+    <%= form.text_field :source_id, disabled: league.persisted?, class: "disabled:text-gray-400 block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :source %>
+    <%= form.select :source, options_for_select(League.sources.map { |source, _| [source.titleize, source] }), {}, class: "disabled:text-gray-500 block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", disabled: league.persisted? %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :shareable %>
+    <%= form.check_box :shareable, class: "block mt-2 h-5 w-5" %>
+  </div>
+
+  <hr />
+
+  <div class="my-5">
+    <h1 class="font-bold text-xl">Private League Settings</h1>
+
+    <div class="text-sm text-gray-500 mt-3">
+      <i>Note: only required for leagues that are not publicly accessible on <a href="https://www.espn.com" target="_blank">espn.com</a></i>
+
+      <p class="my-5">A private league is slightly more difficult to setup because now we somehow need to “login” through the import. One way to do this is to send session cookies along with the request. Specifically we need to get the cookies named "SWID" and "espn_s2".</p>
+
+      <p class="my-5">You can find these cookies in Safari by opening the Storage tab of Developer tools (you can turn on developer tools in Preferences), and look under espn.com in the Cookies folder. In Chrome, you can go to Preferences -> Privacy and Security -> Cookies and Other Site Data  -> See all cookies and site data, search for "espn" and look for the "espn.com" entry.</p>
+    </div>
+  </div>
+
+
+  <div class="my-5">
+    <%= form.label :swid %>
+    <%= form.text_field :swid, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :espn_s2 %>
+    <%= form.text_field :s2, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

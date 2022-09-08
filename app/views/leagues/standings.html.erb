@@ -1,0 +1,58 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <h1 class="font-bold text-4xl"><%= @league.name %> Standings</h1>
+
+  <div class="overflow-x-auto relative text-sm">
+    <table class="w-full text-left">
+      <thead class="whitespace-nowrap">
+        <tr>
+          <th class="p-3">Team</th>
+          <th class="p-3">Games</th>
+          <th class="p-3">Wins</th>
+          <th class="p-3">Losses</th>
+          <th class="p-3">Ties</th>
+          <th class="p-3">Win %</th>
+          <th class="p-3">PF Avg</th>
+          <th class="p-3">PA Avg</th>
+          <th class="p-3">Curr Streak</th>
+          <th class="p-3">Max WS</th>
+          <th class="p-3">Max LS</th>
+          <th class="p-3">Playoffs</th>
+          <th class="p-3">Champs</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @standings.each do |standings_record| %>
+          <tr class="even:bg-gray-100 odd:bg-blue-100">
+            <td class="p-3">
+              <h5 class="font-bold"><%= standings_record.team.name %></h5>
+              <span class="text-gray-700"><%= standings_record.team.primary_owner.short_name %></span>
+
+            </td>
+            <td class="p-3 whitespace-nowrap"><%= standings_record.games %></td>
+            <td class="p-3 whitespace-nowrap"><%= standings_record.wins %></td>
+            <td class="p-3 whitespace-nowrap"><%= standings_record.losses %></td>
+            <td class="p-3 whitespace-nowrap"><%= standings_record.ties %></td>
+            <td class="p-3 whitespace-nowrap font-bold"><%= number_with_precision standings_record.win_percentage, precision: 3 %></td>
+            <td class="p-3 whitespace-nowrap"><%= number_with_precision standings_record.pf_average, precision: 2 %></td>
+            <td class="p-3 whitespace-nowrap"><%= number_with_precision standings_record.pa_average, precision: 2 %></td>
+            <td class="p-3 whitespace-nowrap"><%= standings_record.team.current_streak %></td>
+            <td class="p-3 whitespace-nowrap"><%= standings_record.team.longest_win_streak %></td>
+            <td class="p-3 whitespace-nowrap"><%= standings_record.team.longest_losing_streak %></td>
+            <td class="p-3 text-xs">
+              <% playoffs = standings_record.team.playoff_seasons %>
+              <b>(<%= playoffs.length %>)</b> <i><%= playoffs.join(', ') %></i>
+            </td>
+            <td class="p-3 text-xs">
+              <% champs = standings_record.team.championship_seasons %>
+              <b>(<%= champs.length %>)</b> <i><%= champs.join(', ') %></i>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

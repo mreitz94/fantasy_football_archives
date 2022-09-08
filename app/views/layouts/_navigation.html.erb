@@ -1,0 +1,23 @@
+<nav class="flex items-center justify-between flex-wrap bg-gray-900 p-6">
+  <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <span class="font-semibold text-xl tracking-tight">Fantasy Football Archives</span>
+  </div>
+
+  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div class="text-sm lg:flex-grow">
+      <%= link_to 'Leagues', leagues_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-100 mr-4' %>
+    </div>
+
+    <div>
+      <% btn_classes = 'inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-900 hover:bg-white mt-4 lg:mt-0' %>
+
+      <% if current_user %>
+        <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: btn_classes %>
+      <% else %>
+        <%= link_to 'Sign In', new_user_session_path, class: btn_classes %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
+<%= render partial: 'layouts/league_navigation' if @league.present? %>

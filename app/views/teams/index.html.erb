@@ -1,0 +1,38 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Teams for <%= @league.nickname %></h1>
+  </div>
+
+  <div class="overflow-x-auto relative text-sm">
+    <table class="w-full text-left">
+      <thead class="whitespace-nowrap">
+        <tr>
+          <th class="p-3">ID</th>
+          <th class="p-3">Abbr</th>
+          <th class="p-3">Name</th>
+          <th class="p-3">Owner</th>
+          <th class="p-3">Active?</th>
+          <th class="p-3">Created At</th>
+          <th class="p-3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @teams.each do |team| %>
+          <tr class="even:bg-gray-100 odd:bg-blue-100">
+            <td class="p-3 whitespace-nowrap"><%= team.source_id %></td>
+            <td class="p-3 whitespace-nowrap"><%= team.abbr %></td>
+            <td class="p-3 whitespace-nowrap"><%= team.name %></td>
+            <td class="p-3 whitespace-nowrap"><%= team.primary_owner.name %></td>
+            <td class="p-3 whitespace-nowrap"><%= team.active %></td>
+            <td class="p-3 whitespace-nowrap"><%= team.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

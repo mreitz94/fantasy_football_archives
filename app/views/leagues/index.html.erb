@@ -1,0 +1,40 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Leagues</h1>
+    <%= link_to 'New league', new_league_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div class="overflow-x-auto relative">
+    <table class="w-full text-left" style="white-space: nowrap;">
+      <thead>
+        <tr>
+          <th class="p-3">Name</th>
+          <th class="p-3">Source</th>
+          <th class="p-3">ID</th>
+          <th class="p-3">Start Year</th>
+          <th class="p-3">Shareable?</th>
+          <th class="p-3">Created At</th>
+          <th class="p-3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @leagues.each do |league| %>
+          <tr class="even:bg-gray-100 odd:bg-blue-100">
+            <td class="p-3 whitespace-nowrap"><%= link_to league.name, standings_league_path(league), class: 'font-bold text-blue-600' %></td>
+            <td class="p-3 whitespace-nowrap"><%= league.source %></td>
+            <td class="p-3 whitespace-nowrap"><%= league.source_id %></td>
+            <td class="p-3 whitespace-nowrap"><%= league.start_year %></td>
+            <td class="p-3 whitespace-nowrap"><%= league.shareable? %></td>
+            <td class="p-3 whitespace-nowrap"><%= league.created_at %></td>
+            <td class="p-3 whitespace-nowrap"><%= link_to 'Edit', edit_league_path(league) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
